@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
-  workflow_dispatch:   # permite ejecutarlo a mano desde la pestaña Actions
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,8 +20,8 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Instalar Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Aceptar licencias del Android SDK
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Instalar Gradle
         uses: gradle/actions/setup-gradle@v4
